@@ -1,0 +1,133 @@
+//
+//  ViewController.swift
+//  carrent
+//
+//  Created by MacStudent on 2020-03-06.
+//  Copyright © 2020 MacStudent. All rights reserved.
+//
+
+import UIKit
+var tops = 0
+let cars = ["BMW","Mercedez","Mazda","Honda"]
+let prices = [1200,2300,1200,2200]
+
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return cars.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return cars[row]
+    }
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var rate: UITextField!
+    @IBOutlet weak var car: UIPickerView!
+    @IBOutlet weak var lesstha18: UIButton!
+    @IBOutlet weak var mid: UIButton!
+    @IBOutlet weak var sixtyfive: UIButton!
+    @IBOutlet weak var navigator: UIButton!
+    @IBOutlet weak var child: UIButton!
+    @IBOutlet weak var unlimited: UIButton!
+    @IBOutlet weak var bill: UITextField!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        super.viewDidLoad()
+               self.car.delegate = self
+               self.car.dataSource = self
+    }
+
+   // @IBOutlet weak var image: UIImageView!
+    var cars: [String] = ["BMW","Mercedez","Mazda","Honda"]
+  // cars.image=UIImage(named:pickerData[row])
+
+    @IBAction func lessAction(_ sender:UIButton) {
+        if sender.isSelected {
+               sender.isSelected = false
+           }
+           else {
+               sender.isSelected = true
+               mid.isSelected = false
+               sixtyfive.isSelected = false
+           }
+    }
+    @IBAction func midAction(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+        }
+        else {
+            sender.isSelected = true
+            lesstha18.isSelected = false
+            sixtyfive.isSelected = false
+        }
+    }
+    @IBAction func maxAction(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            }
+        else {
+            sender.isSelected = true
+            mid.isSelected = false
+            lesstha18.isSelected = false
+        }
+    
+    }
+    
+    @IBAction func navAction(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            tops = tops - 1
+        }
+        else {
+            sender.isSelected = true
+            tops = tops + 1
+        }
+    }
+    @IBAction func childAction(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            tops = tops - 1
+        }
+        else {
+            sender.isSelected = true
+            tops = tops + 1
+        }
+    }
+    
+    @IBAction func unlimitedAction(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            tops = tops - 1
+        }
+        else {
+            sender.isSelected = true
+            tops = tops + 1
+        }
+    }
+    @IBAction func calc(_ sender: Any) {
+        let n1 = Double(rate.text!)!
+        var bill1 = 0.0
+        if lesstha18.isSelected && navigator.isSelected{
+            bill1 = n1 + 5 + 7 + ( 13/100 * n1)
+            bill.text = String(bill1)
+        }
+        
+        else {
+           bill1 = n1 + ( 10/100 * n1) + ( 13/100 * n1)
+            bill.text = String(bill1)
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+ rate.text = String(prices[row])
+        image.image=UIImage(named:cars[row])
+
+       //make sure the nama of the image file exactly the same in the array of picker
+
+        
+
+    }
+}
+
+
